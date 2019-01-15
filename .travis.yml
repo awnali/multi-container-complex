@@ -5,4 +5,10 @@ script:
   - docker build ./client -t awnali/multi-container-complex-client
   - docker build ./server -t awnali/multi-container-complex-server
   - docker build ./worker -t awnali/multi-container-complex-worker
-  - docker build ./ngnix -t awnali/multi-container-complex-ngnix
+  - docker build ./nginx -t awnali/multi-container-complex-nginx
+after_success:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push awnali/multi-container-complex-client
+  - docker push awnali/multi-container-complex-server
+  - docker push awnali/multi-container-complex-worker
+  - docker push awnali/multi-container-complex-nginx
