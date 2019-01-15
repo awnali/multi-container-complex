@@ -9,19 +9,13 @@ services:
       - client
   redis:
     image: "redis"
-    ports:
-      - "6379:6379"
   client:
     build: ./client
-    ports:
-      - "3000:3000"
     restart: on-failure
     depends_on:
       - api
   api:
     build: ./server
-    ports:
-      - "3001:3001"
     depends_on:
       - worker
     environment:
