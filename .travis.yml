@@ -12,3 +12,15 @@ after_success:
   - docker push awnali/multi-container-complex-server
   - docker push awnali/multi-container-complex-worker
   - docker push awnali/multi-container-complex-nginx
+deploy:
+  provider: elasticbeanstalk
+  region: us-west-1
+  app: "multi-docker-complex"
+  env: "MultiDockerComplex-env"
+  bucket_name: "elasticbeanstalk-us-west-1-131625054305"
+  bucket_path: "multi-docker-complex"
+  on:
+    branch: master
+  access_key_id: "$AWS_KEY"
+  secret_access_key:
+    secure: "$AWS_SECRET"
